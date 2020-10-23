@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 // import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
@@ -32,7 +30,7 @@ class RetryInterceptor extends Interceptor {
       err.request.extra = err.request.extra..addAll(extra.toExtra());
 
       try {
-        errorCallback(ErrorResult(err.request.uri.toString(), err.message, extra.retries, err.error));
+        errorCallback(ErrorResult(err.request.uri.toString(), err.message, extra.retries, err.error.toString()));
 
         // logger?.warning(
         //     "[${err.request.uri}] An error occured during request, trying a again (remaining tries: ${extra.retries}, error: ${err.error})");
@@ -59,7 +57,7 @@ class ErrorResult {
   final String uri;
   final String response;
   final retryCount;
-  final SocketException error;
+  final String error;
 
   // final allowedRetries;
 
