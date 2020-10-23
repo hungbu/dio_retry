@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 // import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
@@ -57,7 +59,7 @@ class ErrorResult {
   final String uri;
   final String response;
   final retryCount;
-  final String error;
+  final SocketException error;
 
   // final allowedRetries;
 
