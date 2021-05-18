@@ -14,7 +14,7 @@ class RetryInterceptor extends Interceptor {
       : this.options = options ?? const RetryOptions();
 
   @override
-  onError(DioError err) async {
+  onError(DioError err, ErrorInterceptorHandler handler) async {
     var extra = RetryOptions.fromExtra(err.request) ?? this.options;
 
 //     var shouldRetry = extra.retries > 0 && await extra.retryEvaluator(err); (bugged, as per https://github.com/aloisdeniel/dio_retry/pull/5)
@@ -45,7 +45,6 @@ class RetryInterceptor extends Interceptor {
         return e;
       }
     }
-
-    return super.onError(err);
+    return handler.next(err);
   }
 }
